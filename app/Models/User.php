@@ -41,6 +41,8 @@ use Auth;
  * @property-read int|null $replies_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Topic[] $topics
  * @property-read int|null $topics_count
+ * @property int $notification_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereNotificationCount($value)
  */
 class User extends Authenticatable implements MustVerifyEmailContract
 {
@@ -106,5 +108,14 @@ class User extends Authenticatable implements MustVerifyEmailContract
         }
 
         $this->laravelNotify($instance);
+    }
+
+    public function markAsRead()
+    {
+        app('events')->fire();
+        \App::make('events')->flush();
+        $this->notification_count = 0;
+        $this->save();
+        $this->unreadNotifications->markAsRead();
     }
 }
