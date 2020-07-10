@@ -70,7 +70,12 @@ class User extends Authenticatable implements MustVerifyEmailContract
 
     public function topics()
     {
-        $res =  $this->hasMany(Topic::class);
+        $res = $this->hasMany(Topic::class);
         return $res;
+    }
+
+    public function isAuthorOf($model)
+    {
+        return $this->id == $model->user_id;
     }
 }
