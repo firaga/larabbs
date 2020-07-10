@@ -43,6 +43,8 @@ use Illuminate\Database\Eloquent\Builder;
  * @mixin \Eloquent
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Topic recentReplied()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Topic withOrder($order)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Reply[] $replies
+ * @property-read int|null $replies_count
  */
 class Topic extends Model
 {
@@ -88,5 +90,10 @@ class Topic extends Model
     public function link($params = [])
     {
         return route('topics.show', array_merge([$this->id, $this->slug], $params));
+    }
+
+    public function replies()
+    {
+        return $this->hasMany(Reply::class);
     }
 }
