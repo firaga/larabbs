@@ -44,12 +44,21 @@ use Spatie\Permission\Traits\HasRoles;
  * @property-read int|null $topics_count
  * @property int $notification_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereNotificationCount($value)
+ * @property string|null $last_actived_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Permission[] $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Spatie\Permission\Models\Role[] $roles
+ * @property-read int|null $roles_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User permission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User role($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\User whereLastActivedAt($value)
  */
 class User extends Authenticatable implements MustVerifyEmailContract
 {
     use MustVerifyEmailTrait;
     use HasRoles;
     use Traits\ActiveUserHelper;
+    use Traits\LastActivedAtHelper;
 
     use Notifiable {
         notify as protected laravelNotify;
