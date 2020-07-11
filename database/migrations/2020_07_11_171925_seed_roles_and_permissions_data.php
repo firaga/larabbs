@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use App\Models\Model;
 
 class SeedRolesAndPermissionsData extends Migration
 {
