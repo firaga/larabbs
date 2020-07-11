@@ -24,8 +24,8 @@ class UsersTableSeeder extends Seeder
             'https://cdn.learnku.com/uploads/images/201710/14/1/NDnzMutoxX.png',
         ];
 
-        $users  = factory(User::class)->times(10)->make()
-            ->each(function($user,$index) use($faker,$avatars){
+        $users = factory(User::class)->times(10)->make()
+            ->each(function ($user, $index) use ($faker, $avatars) {
                 // 从头像数组中随机取出一个并赋值
                 $user->avatar = $faker->randomElement($avatars);
             });
@@ -42,5 +42,10 @@ class UsersTableSeeder extends Seeder
         $user->email = 'summer@example.com';
         $user->avatar = 'https://cdn.learnku.com/uploads/images/201710/14/1/ZqM7iaP4CR.png';
         $user->save();
+
+        $user->assignRole('Founder');
+
+        $user = User::find(2);
+        $user->assignRole('Maintainer');
     }
 }
