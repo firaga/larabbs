@@ -17,13 +17,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::prefix('v1')->namespace('Api')->name('api.v1.')->group(function () {
+Route::prefix('v1')->namespace('Api')->name('api.v1.')
+    ->middleware('throttle:' . config('api.rate_limits.sign'))->group(function () {
 //    Route::get('version', function () {
 //        abort(403, 'test');
 //        return 'this is version v1';
 //    })->name('version');
-    // 短信验证码
-    Route::post('verificationCodes', 'VerificationCodesController@store')
-        ->name('verificationCodes.store');
-    Route::post('users','UsersController@store')->name('user.store');
-});
+        // 短信验证码
+        Route::post('verificationCodes', 'VerificationCodesController@store')
+            ->name('verificationCodes.store');
+        Route::post('users', 'UsersController@store')->name('user.store');
+    });
+
+Route::middleware('throttle:' . config('api.rate_limits.access'))
+    ->group(function () {
+
+    });
