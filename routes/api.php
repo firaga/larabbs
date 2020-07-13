@@ -33,3 +33,5 @@ Route::middleware('throttle:' . config('api.rate_limits.access'))
     ->group(function () {
 
     });
+//https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx1bfe22f0c3c83256&redirect_uri=http://larabbs.test&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect
+//https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx1bfe22f0c3c83256&secret=5bc4cf1ed9e7664e7a34aa2f11d4a805&code=061pNsqx1Ieuwc0Yxiox1NVpqx1pNsqM&grant_type=authorization_code
