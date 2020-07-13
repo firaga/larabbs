@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use App\Http\Requests\Api\VerificationCodeRequest;
 use Overtrue\EasySms\EasySms;
+use Str;
 
 class VerificationCodesController extends Controller
 {
@@ -15,7 +16,6 @@ class VerificationCodesController extends Controller
         if (!app()->environment('production')) {
             $code = '1234';
         } else {
-
             // 生成4位随机数，左侧补0
             $code = str_pad(random_int(1, 9999), 4, 0, STR_PAD_LEFT);
 
